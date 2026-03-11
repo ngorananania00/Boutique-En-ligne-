@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ma Boutique</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <div class="logo">🛒 <span>MonShop</span></div>
+      <div class="contact-banner">
+        <span class="ping"></span>
+        Commandez par téléphone : <strong id="header-phone">Chargement...</strong>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Nos <em>Produits</em></h1>
+      <p>Trouvez ce qu'il vous faut, appelez-nous pour commander.</p>
+    </div>
+    <div class="hero-wave">
+      <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="#f5f0e8"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- PRODUITS -->
+  <main>
+    <div class="filters">
+      <input type="text" id="search" placeholder="🔍 Rechercher un produit..." oninput="filterProducts()" />
+    </div>
+    <div class="grid" id="product-grid">
+      <!-- Produits injectés par JS -->
+    </div>
+    <div class="empty-state" id="empty-state" style="display:none">
+      <p>Aucun produit trouvé. 😕</p>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© <span id="year"></span> MonShop — Pour commander, appelez le <strong id="footer-phone"></strong></p>
+  </footer>
+
+  <!-- MODAL -->
+  <div class="modal-overlay" id="modal" onclick="closeModal(event)">
+    <div class="modal-box">
+      <button class="modal-close" onclick="document.getElementById('modal').style.display='none'">✕</button>
+      <img id="modal-img" src="" alt="" />
+      <div class="modal-info">
+        <h2 id="modal-name"></h2>
+        <p id="modal-desc"></p>
+        <div class="modal-prices">
+          <span class="old-price" id="modal-old"></span>
+          <span class="new-price" id="modal-new"></span>
+        </div>
+        <a class="call-btn" id="modal-call" href="#">📞 Appeler pour commander</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

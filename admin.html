@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin — MonShop</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+</head>
+<body class="admin-body">
+
+  <div class="admin-wrapper">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">⚙️ Admin</div>
+      <nav>
+        <a href="#" class="active" onclick="showTab('products')">📦 Produits</a>
+        <a href="#" onclick="showTab('settings')">🏪 Paramètres</a>
+        <a href="index.html" target="_blank">👁️ Voir le site</a>
+      </nav>
+      <div class="sidebar-footer">
+        <span>🔒 Zone privée</span>
+      </div>
+    </aside>
+
+    <!-- Main content -->
+    <div class="admin-main">
+
+      <!-- TAB : PRODUITS -->
+      <div id="tab-products" class="tab-content active">
+        <div class="admin-header">
+          <h1>Gestion des produits</h1>
+          <button class="btn-primary" onclick="openAddModal()">+ Ajouter un produit</button>
+        </div>
+
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Photo</th>
+                <th>Nom</th>
+                <th>Prix normal</th>
+                <th>Prix promo</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="admin-tbody">
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TAB : PARAMÈTRES -->
+      <div id="tab-settings" class="tab-content">
+        <div class="admin-header">
+          <h1>Paramètres de la boutique</h1>
+        </div>
+        <div class="settings-form">
+          <label>Nom de la boutique</label>
+          <input type="text" id="shop-name" placeholder="Ex: MonShop" />
+
+          <label>Numéro de téléphone</label>
+          <input type="tel" id="shop-phone" placeholder="Ex: +225 07 00 00 00 00" />
+
+          <label>Slogan / Description</label>
+          <input type="text" id="shop-slogan" placeholder="Ex: Les meilleurs produits à prix choc !" />
+
+          <button class="btn-primary" onclick="saveSettings()">💾 Enregistrer</button>
+          <div class="save-msg" id="settings-msg"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL AJOUT/EDIT -->
+  <div class="modal-overlay" id="admin-modal" onclick="closeAdminModal(event)">
+    <div class="modal-box admin-modal-box">
+      <button class="modal-close" onclick="document.getElementById('admin-modal').style.display='none'">✕</button>
+      <h2 id="form-title">Ajouter un produit</h2>
+      <form onsubmit="saveProduct(event)" class="product-form">
+        <input type="hidden" id="edit-index" value="-1"/>
+
+        <label>Nom du produit *</label>
+        <input type="text" id="f-name" required placeholder="Ex: iPhone 15 Pro"/>
+
+        <label>Description</label>
+        <textarea id="f-desc" rows="3" placeholder="Décrivez le produit..."></textarea>
+
+        <label>URL de la photo *</label>
+        <input type="url" id="f-img" required placeholder="https://exemple.com/photo.jpg"/>
+        <small>💡 Utilise <a href="https://imgur.com" target="_blank">imgur.com</a> pour héberger gratuitement tes images.</small>
+
+        <div class="form-row">
+          <div>
+            <label>Prix normal (FCFA) *</label>
+            <input type="number" id="f-price" required placeholder="15000"/>
+          </div>
+          <div>
+            <label>Prix promo (FCFA)</label>
+            <input type="number" id="f-promo" placeholder="12000"/>
+          </div>
+        </div>
+
+        <label>Catégorie</label>
+        <input type="text" id="f-cat" placeholder="Ex: Électronique, Vêtements..."/>
+
+        <div class="form-actions">
+          <button type="button" class="btn-secondary" onclick="document.getElementById('admin-modal').style.display='none'">Annuler</button>
+          <button type="submit" class="btn-primary">💾 Enregistrer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    renderAdminTable();
+    loadSettings();
+  </script>
+</body>
+</html>
